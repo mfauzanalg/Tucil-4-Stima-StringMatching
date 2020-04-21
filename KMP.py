@@ -14,11 +14,16 @@ def KMP (T, P):
             if (j == -99):
                 j = temp+1
                 i += 1
-            if (j == m-1 and P[j] == T[i]):
+
+            elif (j == m-1 and P[j] == T[i]):
                 result.append(i-m+1)
-            if (T[i] == P[j]):
+                i += 1
+                j = 0
+
+            elif (T[i] == P[j]):
                 i += 1;
                 j += 1;
+
             else: # miss match
                 temp = j
                 j = bf[j]
@@ -59,20 +64,15 @@ def calculateBF(pattern, j):
             ret = len(pref[i])
             stop = True
         i -= 1
-
     return ret
 
 def main():
-    # f = open ("text.txt", "r")
-    # T = f.read()
-    # P = "COVID-19"
-    # T = "abacaabaccabacabaabb"
-    # P = "abacab"
-    T = "saya adalah fauzan keren, memang fauzan keren"
-    P = "fauzan"
+    f = open ("text.txt", "r")
+    T = f.read()
+    P = "COVID-19"
     print(KMP(T,P))
-    # print(borderFunction(P))
-
+    # T = "saya adalah fauzan keren, memang fauzan keren, sudah tentu fauzan keren"
+    # P = "fauzan"
 
 if __name__ == "__main__":
     main()
