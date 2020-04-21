@@ -3,7 +3,7 @@ from BM import BM
 from KMP import KMP
 from nltk.tokenize import sent_tokenize
 
-#
+# remove val from list
 def removal(the_list, val):
     return [value for value in the_list if value != val]
 
@@ -40,6 +40,7 @@ def findJumlah(T, P):
     return ''.join(hasil)
 
 
+# get contain
 def getContain(teks, pattern):
     allSentences = sent_tokenize(teks)
     contain = []
@@ -49,8 +50,8 @@ def getContain(teks, pattern):
             contain.append(allSentences[i])
     return contain
 
-
-def extractInfo(contain, teks, pattern):
+# extracting info
+def extractInfo(contain, teks, pattern, defDate):
     kalimat = []
     jumlah = []
     waktu = []
@@ -65,32 +66,39 @@ def extractInfo(contain, teks, pattern):
         if (regexDate(contain[i])): # kalo nemu tanggal
              waktu.append(regexDate(contain[i])[0])
         else:
-            waktu.append("-")
+            waktu.append(defDate)
     
     return kalimat, jumlah, waktu
 
 
+# combine lists
+def combine(list1, list2, list3):
+    merged = [(list1[i], list2[i], list3[i]) for i in range(0, len(list1))]
+    return merged
+
+# find default date
+def findDate(teks):
+    x = regexDate(teks)
+    return x[0]
+
 def main():
     f = open("text.txt", "r")
-    teks = f.read()
-    pattern = "terkonfirmasi positif"
-    T = teks.lower()
-    P = pattern.lower()
+    T = f.read()
+    P = "terkonfirmasi positif"
 
-
+    defaultDate = findDate(T)
     contain = getContain(T,P)
-    kalimat, jumlah, waktu = extractInfo(contain,T,P)
+    kalimat, jumlah, waktu = extractInfo(contain,T,P, defaultDate)
+    hasil = combine (kalimat, jumlah, waktu)
 
-    for i in range (len(kalimat)):
-        print("")
+    for i in range (len(hasil)):
         print("kalimat")
-        print(kalimat[i])
+        print(hasil[i][0])
         print("jumlah")
-        print(jumlah[i])
+        print(hasil[i][1])
         print("waktu")
-        print(waktu[i])
+        print(hasil[i][2])
 
-    
     
 if __name__ == "__main__":
     main()
