@@ -1,7 +1,6 @@
 from flask import Flask, redirect, url_for, render_template
 from BM import BM
 from KMP import KMP
-from Regex import findJumlah, regexDate
 
 app = Flask(__name__)
 @app.route("/")

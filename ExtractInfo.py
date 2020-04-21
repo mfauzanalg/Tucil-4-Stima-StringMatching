@@ -42,10 +42,10 @@ def findJumlah(T, P):
 
 # get contain
 def getContain(teks, pattern):
-    allSentences = sent_tokenize(teks)
+    allSentences = sent_tokenize(teks.lower())
     contain = []
     for i in range(len(allSentences)):
-        ret = KMP(allSentences[i], pattern)
+        ret = KMP(allSentences[i], pattern.lower())
         if ret: #if not empty
             contain.append(allSentences[i])
     return contain
@@ -81,10 +81,22 @@ def findDate(teks):
     x = regexDate(teks)
     return x[0]
 
-def main():
-    f = open("text.txt", "r")
+# process file name
+def process(filename, pattern):
+    f = open(filename, "r")
     T = f.read()
+    P = pattern
+
+    defaultDate = findDate(T)
+    contain = getContain(T,P)
+    kalimat, jumlah, waktu = extractInfo(contain,T,P, defaultDate)
+    hasil = combine (kalimat, jumlah, waktu)
+
+
+def main():
     P = "terkonfirmasi positif"
+    
+    process("text.txt", P)
 
     defaultDate = findDate(T)
     contain = getContain(T,P)
