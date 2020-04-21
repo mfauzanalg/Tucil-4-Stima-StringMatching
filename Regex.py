@@ -19,15 +19,18 @@ def regexJumlah(teks):
 
 # find nearest number to the pattern
 def findJumlah(T, P):
-    pIndex = KMP(T,P)
+    print(T)
+    pIndex = BM(T,P)
     vStart = 999
     vEnd = 999
     x = regexJumlah(T)
     hasil = []
+    temp2 = 999
 
     for match in x:
         temp = match.start() - pIndex[0]
-        if (abs(temp) < vStart):
+        if (abs(temp) < abs(temp2)):
+            temp2 = temp
             vStart = match.start()
             vEnd = match.end()
     
@@ -36,35 +39,36 @@ def findJumlah(T, P):
     
     return ''.join(hasil)
 
-def getSentences(teks, pattern):
+def getContain(teks, pattern):
     allSentences = sent_tokenize(teks)
     contain = []
     for i in range(len(allSentences)):
         ret = KMP(allSentences[i], pattern)
         if ret: #if not empty
             contain.append(allSentences[i])
-    
     return contain
 
+
+def extractInfo(contain, teks, pattern):
+    for i in range(len(contain)):
+        print("Kalimat : " + contain[i])
+        print("Keyword : " + pattern)
+        print("Jumlah : " + findJumlah(contain[i],pattern))
+        print("Waktu : " + regexDate(contain[i]))[0]
 
 
 def main():
     f = open("text.txt", "r")
     teks = f.read()
-    pattern = "COVID-19"
-    # teks = "Kemarin, 13-Apr-2019 dari 421 kasus tersebut, 40.2 orang meninggal dunia dengan keterangan terpapar COVID-19 apa mau fauzan"
-    # pattern = "meninggal dunia"
+    pattern = "meninggal dunia"
     T = teks.lower()
     P = pattern.lower()
 
-    print(getSentences(T, P))
-
-
-
-    # print("Kalimat : " + teks)
-    # print("Keyword : " + pattern)
-    # print("Jumlah : " + findJumlah(T,P))
-    # print("Waktu : " + regexDate(teks)[0])
+    contain = getContain(T,P)
+    print("Kalimat : " + contain[0])
+    print("Keyword : " + pattern)
+    print("Jumlah : " + findJumlah(contain[0],pattern))
+    print("Waktu : " + regexDate(contain[0])[0])
     
     
 if __name__ == "__main__":

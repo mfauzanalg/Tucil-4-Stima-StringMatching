@@ -16,8 +16,5 @@ def login():
 def user(usr):
     return f"<h1>{usr}</h1>"
 
-def main():
-    
-
 if __name__ == "__main__":
     app.run()(debug=True)
