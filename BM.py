@@ -3,7 +3,7 @@ class tuple:
         self.var = ""
         self.val = 0
 
-def lo(teks, pattern):
+def lastOccurence(teks, pattern):
     variation = varChar(teks)
     lo = []
     
@@ -46,15 +46,64 @@ def findVar(var, findvar):
         if (var[i] == findvar):
             ret = i
     return ret
-            
 
+# mencari nilai char di Lo
+def valueLo(char, lo):
+    for i in range (len(lo)):
+        if (lo[i].var == char):
+            return lo[i].val
+
+
+def BM(T, P):
+    lo = lastOccurence(T, P)
+    result = []
+    n = len(T)
+    m = len(P)
+    j = m-1 # for pattern
+    i = j # for teks
+    
+    while(i < n):
+        while(j < m and i < n):
+            print(i)
+            if (j == 0 and T[i] == P[j]):
+                print ("wow dia masuk " + str(i))
+                result.append(i)
+                i = i + m
+                j = m-1
+            elif (T[i] == P[j]):
+                i-=1
+                j-=1
+
+            # missmatch
+            elif (T[i] != P[j]): 
+                # kasus ketiga
+                if (valueLo(T[i], lo) == -1):
+                    j = m-1
+                    i = i + m
+                    print("ini dia kasus tiga " + str(i))
+                # kasus pertama
+                elif (valueLo(T[i], lo) < j):
+                    j = m-1
+                    i = i + m - (valueLo(T[i], lo) + 1)
+                    print("ini dia kasus satu " + str(i))
+                # kasus kedua
+                elif (valueLo(T[i], lo) > j):
+                    i = i + m - j
+                    j = m-1
+                    print("ini dia kasus dua " + str(i))
+    
+    return result
+            
+                
 def main():
     # f = open ("text.txt", "r")
     # T = f.read()
     # T = T.lower()
     
-    T = "bddcbdacb"
-    P = "abacab"
+    T = "saya adalah fauzan keren, memang fauzan keren, sudah tentu fauzan keren"
+    P = "fauzan"
+
+    print(BM(T,P))
     
     
 

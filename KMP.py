@@ -67,12 +67,13 @@ def calculateBF(pattern, j):
     return ret
 
 def main():
-    f = open ("text.txt", "r")
-    T = f.read()
-    P = "COVID-19"
+    # f = open ("text.txt", "r")
+    # T = f.read()
+    # P = "COVID-19"
+    T = "saya adalah fauzan keren, memang fauzan keren, sudah tentu fauzan keren"
+    P = "fauzan"
     print(KMP(T,P))
-    # T = "saya adalah fauzan keren, memang fauzan keren, sudah tentu fauzan keren"
-    # P = "fauzan"
+    
 
 if __name__ == "__main__":
     main()
