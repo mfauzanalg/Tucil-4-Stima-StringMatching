@@ -64,9 +64,7 @@ def BM(T, P):
     
     while(i < n):
         while(j < m and i < n):
-            print(i)
             if (j == 0 and T[i] == P[j]):
-                print ("wow dia masuk " + str(i))
                 result.append(i)
                 i = i + m
                 j = m-1
@@ -80,17 +78,14 @@ def BM(T, P):
                 if (valueLo(T[i], lo) == -1):
                     j = m-1
                     i = i + m
-                    print("ini dia kasus tiga " + str(i))
                 # kasus pertama
                 elif (valueLo(T[i], lo) < j):
                     j = m-1
                     i = i + m - (valueLo(T[i], lo) + 1)
-                    print("ini dia kasus satu " + str(i))
                 # kasus kedua
                 elif (valueLo(T[i], lo) > j):
                     i = i + m - j
                     j = m-1
-                    print("ini dia kasus dua " + str(i))
     
     return result
             
