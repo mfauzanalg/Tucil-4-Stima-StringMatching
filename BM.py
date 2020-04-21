@@ -4,27 +4,28 @@ class tuple:
         self.val = 0
 
 def lo(teks, pattern):
-    variance = varChar(teks)
+    variation = varChar(teks)
     lo = []
     
-    for i in range (len(pattern)):
-        ret = findLo(lo, teks[i])
-        if (ret != -1):
-            lo[ret].val = i
-        else:
-            t = tuple()
-            t.var = teks[i]
-            t.val = i
-            lo.append(t)
+    for i in range (len(variation)):
+        item = tuple()
+        item.var = variation[i]
+        item.val = last(pattern, variation[i])
+        lo.append(item)
     
     return lo
 
-# mencari char di lo sudah ada atau belum
-def findLo(lo, findvar):
+
+# mencari last occurance
+def last(list, char):
     ret = -1
-    for i in range(len(lo)):
-        if (lo[i].var == findvar):
+    found = False
+    i = len(list)-1
+    while i >= 0 and not(found):
+        if (list[i] == char):
             ret = i
+            found = True
+        i -= 1
     return ret
 
 
@@ -48,16 +49,14 @@ def findVar(var, findvar):
             
 
 def main():
-    f = open ("text.txt", "r")
-    T = f.read()
-    T = T.lower()
-
-    # print(varChar(T))
-    # lo = LO(T)
-    # for i in range (len(lo)):
-    #     print(lo[i].var + " " + str(lo[i].val))
+    # f = open ("text.txt", "r")
+    # T = f.read()
+    # T = T.lower()
     
-
+    T = "bddcbdacb"
+    P = "abacab"
+    
+    
 
 if __name__ == "__main__":
     main()
