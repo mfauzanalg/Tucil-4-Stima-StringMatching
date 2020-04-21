@@ -1,14 +1,37 @@
 from copy import deepcopy
 
-def KMP (teks, pattern):
-    
+def KMP (T, P):
+    bf = borderFunction(P)
+    result = []
+    n = len(T)
+    m = len(P)
 
+    i = 0 # for teks
+    j = 0 # for pattern
+    temp = j
+    while (i < n):
+        while (j < m and i < n):
+            if (j == -99):
+                j = temp+1
+                i += 1
+            if (j == m-1 and P[j] == T[i]):
+                result.append(i-m+1)
+            if (T[i] == P[j]):
+                i += 1;
+                j += 1;
+            else: # miss match
+                temp = j
+                j = bf[j]
+        i+=1
+
+    return result
 
 def borderFunction(pattern):
     j = len(pattern);
     bf = []
     for i in range (j):
         bf.append(calculateBF(pattern, i))
+        bf[0] = -99
     return bf
 
 def calculateBF(pattern, j):
@@ -40,9 +63,15 @@ def calculateBF(pattern, j):
     return ret
 
 def main():
-    f = open ("text.txt", "r")
-    T = f.read()
-    print(borderFunction("ababababca"))
+    # f = open ("text.txt", "r")
+    # T = f.read()
+    # P = "COVID-19"
+    # T = "abacaabaccabacabaabb"
+    # P = "abacab"
+    T = "saya adalah fauzan keren, memang fauzan keren"
+    P = "fauzan"
+    print(KMP(T,P))
+    # print(borderFunction(P))
 
 
 if __name__ == "__main__":
