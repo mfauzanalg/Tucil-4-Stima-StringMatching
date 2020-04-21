@@ -3,12 +3,13 @@ from BM import BM
 from KMP import KMP
 from nltk.tokenize import sent_tokenize
 
+#
+def removal(the_list, val):
+    return [value for value in the_list if value != val]
+
 # return string date in teks
 def regexDate(teks):
     x = re.findall("[senin|Senin|Selasa|selasa|Rabu|rabu|Kamis|kamis|Jum'at|jumat|Sabtu|sabtu|Minggu|minggu|kemarin|Kemarin]*.*[\d]{1,2}[/ -][abdefgijklmnoprstuvyABDEFGIJKLMNOPRSTYUV0123456789]\w*[/ -][\d]{4}", teks)
-    if (x):
-        return x
-    x = re.findall("[senin|Senin|Selasa|selasa|Rabu|rabu|Kamis|kamis|Jum'at|jumat|Sabtu|sabtu|Minggu|minggu|kemarin|Kemarin]*.*[\d]{1,2}[/ -][abdefgijklmnoprstuvyABDEFGIJKLMNOPRSTYUV0123456789]*[/ -][1234567890]{2}", teks)
     if (x):
         return x
 
@@ -19,7 +20,6 @@ def regexJumlah(teks):
 
 # find nearest number to the pattern
 def findJumlah(T, P):
-    print(T)
     pIndex = BM(T,P)
     vStart = 999
     vEnd = 999
@@ -39,6 +39,7 @@ def findJumlah(T, P):
     
     return ''.join(hasil)
 
+
 def getContain(teks, pattern):
     allSentences = sent_tokenize(teks)
     contain = []
@@ -50,25 +51,45 @@ def getContain(teks, pattern):
 
 
 def extractInfo(contain, teks, pattern):
+    kalimat = []
+    jumlah = []
+    waktu = []
     for i in range(len(contain)):
-        print("Kalimat : " + contain[i])
-        print("Keyword : " + pattern)
-        print("Jumlah : " + findJumlah(contain[i],pattern))
-        print("Waktu : " + regexDate(contain[i]))[0]
+        kalimat.append(contain[i])
+
+        if not(findJumlah(contain[i],pattern)): # kalo ganemu angka
+            jumlah.append("0")
+        else:
+            jumlah.append(findJumlah(contain[i],pattern))
+        
+        if (regexDate(contain[i])): # kalo nemu tanggal
+             waktu.append(regexDate(contain[i])[0])
+        else:
+            waktu.append("-")
+    
+    return kalimat, jumlah, waktu
 
 
 def main():
     f = open("text.txt", "r")
     teks = f.read()
-    pattern = "meninggal dunia"
+    pattern = "terkonfirmasi positif"
     T = teks.lower()
     P = pattern.lower()
 
+
     contain = getContain(T,P)
-    print("Kalimat : " + contain[0])
-    print("Keyword : " + pattern)
-    print("Jumlah : " + findJumlah(contain[0],pattern))
-    print("Waktu : " + regexDate(contain[0])[0])
+    kalimat, jumlah, waktu = extractInfo(contain,T,P)
+
+    for i in range (len(kalimat)):
+        print("")
+        print("kalimat")
+        print(kalimat[i])
+        print("jumlah")
+        print(jumlah[i])
+        print("waktu")
+        print(waktu[i])
+
     
     
 if __name__ == "__main__":
