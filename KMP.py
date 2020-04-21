@@ -69,13 +69,16 @@ def calculateBF(pattern, j):
         i -= 1
     return ret
 
+from nltk.tokenize import sent_tokenize
+
 def main():
-    # f = open ("text.txt", "r")
-    # T = f.read()
+    f = open ("text.txt", "r")
+    T = f.read()
     # P = "COVID-19"
-    T = "saya adalah fauzan keren, memang fauzan keren, sudah tentu fauzan keren"
-    P = "fauzan"
-    print(KMP(T,P))
+    # T = "saya adalah fauzan keren, memang fauzan keren, sudah tentu fauzan keren"
+    # P = "fauzan"
+    # print(KMP(T,P))
+    print(sent_tokenize(T))
     
 
 if __name__ == "__main__":

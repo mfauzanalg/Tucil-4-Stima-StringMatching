@@ -13,7 +13,7 @@ def regexDate(teks):
 
 # return list of number in teks
 def regexJumlah(teks):
-    x = re.finditer("\d+ ", teks)
+    x = re.finditer("[\d/.]+ ", teks)
     return x
 
 # find nearest number to the pattern
@@ -37,7 +37,7 @@ def findJumlah(T, P):
 
 
 def main():
-    teks = "Kemarin, 13-Apr-2019 dari 421 kasus tersebut, 40 orang meninggal dunia dengan keterangan terpapar COVID-19 apa mau fauzan"
+    teks = "Kemarin, 13-Apr-2019 dari 421 kasus tersebut, 40.2 orang meninggal dunia dengan keterangan terpapar COVID-19 apa mau fauzan"
     pattern = "meninggal dunia"
     T = teks.lower()
     P = pattern.lower()
