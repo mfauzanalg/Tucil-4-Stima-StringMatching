@@ -2,6 +2,7 @@ import re
 from BM import BM
 from KMP import KMP
 
+# return string date in teks
 def regexDate(teks):
     x = re.findall("[senin|Senin|Selasa|selasa|Rabu|rabu|Kamis|kamis|Jum'at|jumat|Sabtu|sabtu|Minggu|minggu|kemarin|Kemarin]*.*[\d]{1,2}[/ -][abdefgijklmnoprstuvyABDEFGIJKLMNOPRSTYUV0123456789]\w*[/ -][\d]{4}", teks)
     if (x):
@@ -10,10 +11,12 @@ def regexDate(teks):
     if (x):
         return x
 
+# return list of number in teks
 def regexJumlah(teks):
     x = re.finditer("\d+ ", teks)
     return x
 
+# find nearest number to the pattern
 def findJumlah(T, P):
     pIndex = KMP(T,P)
     vStart = 999
@@ -40,9 +43,8 @@ def main():
     P = pattern.lower()
     print("Kalimat : " + teks)
     print("Keyword : " + pattern)
-    print("Jumlah : " + str(findJumlah(T,P)))
+    print("Jumlah : " + findJumlah(T,P))
     print("Waktu : " + regexDate(teks)[0])
-    
     
     
 if __name__ == "__main__":

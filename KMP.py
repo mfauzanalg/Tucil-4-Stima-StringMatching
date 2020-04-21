@@ -1,5 +1,6 @@
 from copy import deepcopy
 
+# Knuth Morris Pratt Algorithm
 def KMP (T, P):
     bf = borderFunction(P)
     result = []
@@ -31,6 +32,7 @@ def KMP (T, P):
 
     return result
 
+# Make Border Function
 def borderFunction(pattern):
     j = len(pattern);
     bf = []
@@ -39,6 +41,7 @@ def borderFunction(pattern):
         bf[0] = -99
     return bf
 
+# Calculate BF for specific j
 def calculateBF(pattern, j):
     ret = 0
     stop = False

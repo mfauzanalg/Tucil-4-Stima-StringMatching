@@ -1,8 +1,10 @@
+# tuple for LO
 class tuple:
     def __init__(self):
         self.var = ""
         self.val = 0
 
+# Make Lo Table
 def lastOccurence(teks, pattern):
     variation = varChar(teks)
     lo = []
@@ -16,7 +18,7 @@ def lastOccurence(teks, pattern):
     return lo
 
 
-# mencari last occurance
+# looking for last occurence char in list
 def last(list, char):
     ret = -1
     found = False
@@ -29,7 +31,7 @@ def last(list, char):
     return ret
 
 
-# mengembalikan variasi character di teks
+# return variation char in teks
 def varChar(teks):
     var = []
     for i in range (len(teks)):
@@ -39,7 +41,7 @@ def varChar(teks):
     return var
 
 
-# mencari index di varchar sudah ada atau belum
+# looking for variation char index
 def findVar(var, findvar):
     ret = -1
     for i in range(len(var)):
@@ -47,13 +49,13 @@ def findVar(var, findvar):
             ret = i
     return ret
 
-# mencari nilai char di Lo
+# looking for char value in lo
 def valueLo(char, lo):
     for i in range (len(lo)):
         if (lo[i].var == char):
             return lo[i].val
 
-
+# algoritma boyer moore
 def BM(T, P):
     lo = lastOccurence(T, P)
     result = []
