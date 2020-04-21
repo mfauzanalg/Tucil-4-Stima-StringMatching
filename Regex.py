@@ -1,6 +1,7 @@
 import re
 from BM import BM
 from KMP import KMP
+from nltk.tokenize import sent_tokenize
 
 # return string date in teks
 def regexDate(teks):
@@ -35,16 +36,35 @@ def findJumlah(T, P):
     
     return ''.join(hasil)
 
+def getSentences(teks, pattern):
+    allSentences = sent_tokenize(teks)
+    contain = []
+    for i in range(len(allSentences)):
+        ret = KMP(allSentences[i], pattern)
+        if ret: #if not empty
+            contain.append(allSentences[i])
+    
+    return contain
+
+
 
 def main():
-    teks = "Kemarin, 13-Apr-2019 dari 421 kasus tersebut, 40.2 orang meninggal dunia dengan keterangan terpapar COVID-19 apa mau fauzan"
-    pattern = "meninggal dunia"
+    f = open("text.txt", "r")
+    teks = f.read()
+    pattern = "COVID-19"
+    # teks = "Kemarin, 13-Apr-2019 dari 421 kasus tersebut, 40.2 orang meninggal dunia dengan keterangan terpapar COVID-19 apa mau fauzan"
+    # pattern = "meninggal dunia"
     T = teks.lower()
     P = pattern.lower()
-    print("Kalimat : " + teks)
-    print("Keyword : " + pattern)
-    print("Jumlah : " + findJumlah(T,P))
-    print("Waktu : " + regexDate(teks)[0])
+
+    print(getSentences(T, P))
+
+
+
+    # print("Kalimat : " + teks)
+    # print("Keyword : " + pattern)
+    # print("Jumlah : " + findJumlah(T,P))
+    # print("Waktu : " + regexDate(teks)[0])
     
     
 if __name__ == "__main__":

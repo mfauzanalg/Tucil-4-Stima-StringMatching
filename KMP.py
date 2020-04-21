@@ -78,7 +78,6 @@ def main():
     # T = "saya adalah fauzan keren, memang fauzan keren, sudah tentu fauzan keren"
     # P = "fauzan"
     # print(KMP(T,P))
-    print(sent_tokenize(T))
     
 
 if __name__ == "__main__":
