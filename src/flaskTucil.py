@@ -19,9 +19,19 @@ def result(patt):
     if request.method == "POST":
         pattern = request.form["key"]
         return redirect(url_for("result", patt=pattern))
-    else:
-        hasil = process("Corona Satu.txt", patt)
-        hasil += process("Corona Dua.txt", patt)
+    else: # tergantung kepada input user
+        hasil = process("../test/Corona Satu.txt", patt)
+        hasil += process("../test/Corona Dua.txt", patt)
+        hasil = process("../test/Corona Satu.txt", patt)
+        hasil += process("../test/Corona Dua.txt", patt)
+        hasil += process("../test/Corona Tiga.txt", patt)
+        hasil += process("../test/Corona Empat.txt", patt)
+        hasil += process("../test/Corona Lima.txt", patt)
+        hasil += process("../test/Corona Enam.txt", patt)
+        hasil += process("../test/Corona Tujuh.txt", patt)
+        hasil += process("../test/Corona Delapan.txt", patt)
+        hasil += process("../test/Corona Sembilan.txt", patt)
+        hasil += process("../test/Corona Sepuluh.txt", patt)
         if not(hasil):
             return render_template("index.html", list=[["tidak ditemukan", "tidak ditemukan", "tidak ditemukan", "tidak ditemukan"]])
         else:

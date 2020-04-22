@@ -93,9 +93,6 @@ def BM(T, P):
             
                 
 def main():
-    # f = open ("text.txt", "r")
-    # T = f.read()
-    # T = T.lower()
     
     T = "saya adalah fauzan keren, memang fauzan keren, sudah tentu fauzan keren"
     P = "fauzan"

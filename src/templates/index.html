@@ -28,9 +28,32 @@
                       <div class="radio">
                         <label><input type="radio" name="optradio">Knuth Morris Pratt</label>
                       </div>
-                      <div class="radio disabled">
-                        <label><input type="radio" name="optradio" disabled>Option 3</label>
+                      <div class="radio">
+                        <label><input type="radio" name="optradio">Regex</label>
                       </div>
+
+
+                      <br>
+                        <h2>Select file(s) to upload</h2>
+                            <p>
+                                {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    <ul class=flashes>
+                                    {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                {% endwith %}
+                            </p>
+                            <form method="post" action="/" enctype="multipart/form-data">
+                                <dl>
+                                    <p>
+                                        <input type="file" name="files[]" multiple="true" autocomplete="off" required>
+                                    </p>
+                                </dl>
+                            </form>
+
 
                     <br>
                     <input class="btn btn-success" type="submit" value="submit">

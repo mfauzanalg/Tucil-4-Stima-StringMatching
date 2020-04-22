@@ -21,6 +21,8 @@ def regexJumlah(teks):
 # find nearest number to the pattern
 def findJumlah(T, P):
     pIndex = BM(T,P)
+    if not(pIndex):
+        return ''
     vStart = 999
     vEnd = 999
     x = regexJumlah(T)
@@ -46,7 +48,7 @@ def getContain(teks, pattern):
     notLow = sent_tokenize(teks)
     contain = []
     for i in range(len(allSentences)):
-        ret = KMP(allSentences[i], pattern.lower())
+        ret = BM(allSentences[i], pattern.lower())
         if ret: #if not empty
             contain.append(allSentences[i])
     return contain
@@ -85,8 +87,8 @@ def findDate(teks):
 # process file name
 def process(filename, pattern):
     f = open(filename, "r")
-    T = f.read()
-    P = pattern
+    T = f.read().lower()
+    P = pattern.lower()
 
     defaultDate = findDate(T)
     contain = getContain(T,P)
@@ -99,8 +101,16 @@ def process(filename, pattern):
 def main():
     P = "terkonfirmasi positif"
     
-    hasil = process("Corona satu.txt", P)
-    hasil += process("Corona dua.txt", P)
+    hasil = process("test/Corona Satu.txt", P)
+    # hasil += process("Corona Dua.txt", P)
+    # hasil += process("Corona Tiga.txt", P)
+    # hasil += process("Corona Empat.txt", P)
+    # hasil += process("Corona Lima.txt", P)
+    # hasil += process("Corona Enam.txt", P)
+    # hasil += process("Corona Tujuh.txt", P)
+    # hasil += process("Corona Delapan.txt", P)
+    # hasil += process("Corona Sembilan.txt", P)
+    # hasil += process("Corona Sepuluh.txt", P)
 
     for i in range (len(hasil)):
         print("")
