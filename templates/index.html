@@ -12,8 +12,50 @@
                 <p> This application uses Boyer-Moore algorithm, Knuth Morris Pratt algorithm and Regex in extracting info</p>
             </div>
         </div>
+        <div class="container">
+            <h2 class="page-header">Hello, Peeps!</h2>
+
+
+            <form action="#" method="POST">
+                <p>Name:</p>
+                <p><input type="text" name="key"></p>
+                <div class="form-group">
+                    <p><input class="btn btn-primary" type="submit" value="submit"></p>
+                </div>
+            </form>
+
+
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label>Search For</label>
+                    <input type="text" name="key" class="form-control" placeholder="Input Keyword">
+                    <br>
+                    <input class="btn btn-success" type="submit" value="submit">
+                </div>
+            </form>
+
+            
+
+            
+        </div>
+        <div class = "container">
+            {% for i in list %}
+                <br>
+                Kalimat : {{i[0]}}
+                <br>
+                Jumlah : {{i[1]}}
+                <br>
+                Waktu : {{i[2]}}
+                <br>
+                Nama File : {{i[3]}}
+                <br>
+            {% endfor %}
+        </div>
 
         
+
+        <hr>
+
 
 
 

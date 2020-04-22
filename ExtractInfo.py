@@ -72,8 +72,8 @@ def extractInfo(contain, teks, pattern, defDate):
 
 
 # combine lists
-def combine(list1, list2, list3):
-    merged = [(list1[i], list2[i], list3[i]) for i in range(0, len(list1))]
+def combine(list1, list2, list3, item):
+    merged = [(list1[i], list2[i], list3[i], item) for i in range(0, len(list1))]
     return merged
 
 # find default date
@@ -90,26 +90,27 @@ def process(filename, pattern):
     defaultDate = findDate(T)
     contain = getContain(T,P)
     kalimat, jumlah, waktu = extractInfo(contain,T,P, defaultDate)
-    hasil = combine (kalimat, jumlah, waktu)
+    hasil = combine (kalimat, jumlah, waktu, filename)
+
+    return hasil
 
 
 def main():
     P = "terkonfirmasi positif"
     
-    process("text.txt", P)
-
-    defaultDate = findDate(T)
-    contain = getContain(T,P)
-    kalimat, jumlah, waktu = extractInfo(contain,T,P, defaultDate)
-    hasil = combine (kalimat, jumlah, waktu)
+    hasil = process("text.txt", P)
+    hasil += process("text2.txt", P)
 
     for i in range (len(hasil)):
+        print("")
         print("kalimat")
         print(hasil[i][0])
         print("jumlah")
         print(hasil[i][1])
         print("waktu")
         print(hasil[i][2])
+        print("file")
+        print(hasil[i][3])
 
     
 if __name__ == "__main__":

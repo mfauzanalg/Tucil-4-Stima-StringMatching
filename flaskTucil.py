@@ -1,19 +1,26 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, request
 from BM import BM
 from KMP import KMP
+from ExtractInfo import process
 
 app = Flask(__name__)
-@app.route("/")
+
+
+@app.route("/", methods = ["POST", "GET"])
 def home():
-    return render_template("index.html")
+    if request.method == "POST":
+        pattern = request.form["key"]
+        return redirect(url_for("result", patt=pattern))
+    else:
+        return render_template("index.html")
 
-@app.route("/login", methods=["POST", "GET"])
-def login():
-    return render_template()
+@app.route("/result/<patt>")
+def result(patt):
+    P = "terkonfirmasi positif"
+    hasil = process("Corona Satu.txt", patt)
+    hasil += process("Corona Dua.txt", patt)
+    return render_template("index.html", list=hasil)
 
-@app.route("/<usr>")
-def user(usr):
-    return f"<h1>{usr}</h1>"
 
 if __name__ == "__main__":
     app.run()(debug=True)
