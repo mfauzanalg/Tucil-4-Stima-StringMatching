@@ -37,6 +37,9 @@ def result(patt):
         else:
             return render_template("index.html", list=hasil)
 
+@app.route("/perihal")
+def perihal():
+    return render_template("perihal.html")
 
 if __name__ == "__main__":
     app.run()(debug=True)
