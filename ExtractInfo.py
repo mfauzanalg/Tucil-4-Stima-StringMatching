@@ -48,7 +48,7 @@ def getContain(teks, pattern):
     for i in range(len(allSentences)):
         ret = KMP(allSentences[i], pattern.lower())
         if ret: #if not empty
-            contain.append(notLow[i])
+            contain.append(allSentences[i])
     return contain
 
 # extracting info
@@ -100,7 +100,7 @@ def main():
     P = "terkonfirmasi positif"
     
     hasil = process("Corona satu.txt", P)
-    # hasil += process("Corona dua.txt", P)
+    hasil += process("Corona dua.txt", P)
 
     for i in range (len(hasil)):
         print("")
