@@ -43,11 +43,12 @@ def findJumlah(T, P):
 # get contain
 def getContain(teks, pattern):
     allSentences = sent_tokenize(teks.lower())
+    notLow = sent_tokenize(teks)
     contain = []
     for i in range(len(allSentences)):
         ret = KMP(allSentences[i], pattern.lower())
         if ret: #if not empty
-            contain.append(allSentences[i])
+            contain.append(notLow[i])
     return contain
 
 # extracting info
@@ -58,10 +59,10 @@ def extractInfo(contain, teks, pattern, defDate):
     for i in range(len(contain)):
         kalimat.append(contain[i])
 
-        if not(findJumlah(contain[i],pattern)): # kalo ganemu angka
+        if not(findJumlah(contain[i].lower(),pattern.lower())): # kalo ganemu angka
             jumlah.append("0")
         else:
-            jumlah.append(findJumlah(contain[i],pattern))
+            jumlah.append(findJumlah(contain[i].lower(),pattern.lower()))
         
         if (regexDate(contain[i])): # kalo nemu tanggal
              waktu.append(regexDate(contain[i])[0])
@@ -98,8 +99,8 @@ def process(filename, pattern):
 def main():
     P = "terkonfirmasi positif"
     
-    hasil = process("text.txt", P)
-    hasil += process("text2.txt", P)
+    hasil = process("Corona satu.txt", P)
+    # hasil += process("Corona dua.txt", P)
 
     for i in range (len(hasil)):
         print("")
